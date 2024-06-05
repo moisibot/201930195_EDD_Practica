@@ -1,0 +1,4 @@
+# ninja log v5
+1	20	1717615354759446344	build.ninja	23bf906aa3c21a1c
+1	253	1717482236803289243	CMakeFiles/ControlAeropuerto.dir/main.cpp.o	570a412c5309c4f9
+253	315	1717482236867288303	ControlAeropuerto	33d0e60cbf497932

@@ -1,0 +1,3 @@
+/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/CMakeFiles/ControlAeropuerto.dir
+/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/CMakeFiles/rebuild_cache.dir
