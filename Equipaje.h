@@ -15,17 +15,17 @@ private:
 public:
     Equipaje(string id, int p, Pasajero* prop);
 
-    // Getters
+    // get
     string getIdEquipaje() const;
     int getPeso() const;
     Pasajero* getPropietario() const;
 
-    // Setters
+    // set
     void setIdEquipaje(string id);
     void setPeso(int p);
     void setPropietario(Pasajero* prop);
 
-    // Otros métodos
+    //  mostrar informacion de los equipajes
     void mostrarInfo() const;
     string getInfoPropietario() const;
 };
