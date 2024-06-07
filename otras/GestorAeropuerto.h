@@ -1,7 +1,5 @@
-
 #ifndef CONTROLAEROPUERTO_GESTORAEROPUERTO_H
 #define CONTROLAEROPUERTO_GESTORAEROPUERTO_H
-
 #include <vector>
 #include "../Avion.h"
 #include "../Estructura/ListaCircularDoble.h"
@@ -10,7 +8,6 @@
 #include "../Estructura/Cola.h"
 #include "../Estructura/Pila.h"
 #include "../Estructura/ListaDobleEnlazada.h"
-
 class GestorAeropuerto {
 private:
     ListaCircularDoble<Avion, string> avionesDisponibles;
@@ -18,7 +15,6 @@ private:
     Cola<Pasajero> colaRegistro;
     Pila<Equipaje> pilaEquipaje;
     ListaDobleEnlazada<Pasajero> listaPasajeros;
-
 public:
     void cargarAviones(const std::vector<Avion>& aviones);
     void cargarPasajeros(const std::vector<Pasajero>& pasajeros);

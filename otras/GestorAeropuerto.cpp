@@ -1,5 +1,4 @@
 #include "GestorAeropuerto.h"
-
 void GestorAeropuerto::cargarAviones(const vector<Avion>& aviones) {
     for (const auto& avion : aviones) {
         if (avion.getEstado() == "Disponible")
@@ -8,7 +7,6 @@ void GestorAeropuerto::cargarAviones(const vector<Avion>& aviones) {
             avionesMantenimiento.insertar(avion);
     }
 }
-
 void GestorAeropuerto::registrarPasajero() {
     if (!colaRegistro.estaVacia()) {
         Pasajero p = colaRegistro.desencolar();
@@ -18,10 +16,8 @@ void GestorAeropuerto::registrarPasajero() {
         }
     }
 }
-
 void GestorAeropuerto::asignarVuelosPasajeros() {
     if (!hayAvionesDisponibles()) return;
-
     Avion avion = avionesDisponibles.pop();
     int asientosAsignados = 0;
     while (!colaRegistro.estaVacia() && asientosAsignados < avion.getCapacidad()) {
@@ -55,7 +51,6 @@ void GestorAeropuerto::cargarPasajeros(const std::vector<Pasajero>& pasajeros) {
         colaRegistro.encolar(pasajero);
     }
 }
-
 Pasajero* GestorAeropuerto::buscarPasajeroPorPasaporte(const std::string& pasaporte) {
     for (auto it = listaPasajeros.begin(); it != listaPasajeros.end(); it = it->siguiente) {
         if (it->dato.getNumeroPasaporte() == pasaporte) {

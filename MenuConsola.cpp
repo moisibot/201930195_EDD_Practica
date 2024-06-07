@@ -13,7 +13,6 @@ void MenuConsola::mostrarMenuPrincipal() {
         cout << "3. Consultar Pasajero" << endl;
         cout << "4. Generar Reportes" << endl;
         cout << "5. Salir" << endl;
-
         int opcion = solicitarOpcion(1, 5);
         switch (opcion) {
             case 1: cargarArchivos(); break;
@@ -24,21 +23,16 @@ void MenuConsola::mostrarMenuPrincipal() {
         }
     }
 }
-
 void MenuConsola::cargarArchivos() {
     string archivoAviones = solicitarArchivo("aviones");
     string archivoPasajeros = solicitarArchivo("pasajeros");
-
     auto aviones = GestorArchivos::cargarAvionesDesdeJSON(archivoAviones);
     auto pasajeros = GestorArchivos::cargarPasajerosDesdeJSON(archivoPasajeros);
-
     aeropuerto.cargarAviones(aviones);
     aeropuerto.cargarPasajeros(pasajeros);
-
     cout << "Archivos cargados exitosamente." << endl;
     system("pause");
 }
-
 void MenuConsola::consultarPasajero() {
     cout << "Ingrese el número de pasaporte: ";
     string pasaporte;
@@ -52,13 +46,11 @@ void MenuConsola::consultarPasajero() {
     }
     system("pause");
 }
-
 void MenuConsola::realizarMovimientos() {
     string comando;
     while (true) {
         cout << "Ingrese un comando (IngresoEquipaje, MantenimientoAviones, Salir): ";
         cin >> comando;
-
         if (comando == "IngresoEquipaje") {
             aeropuerto.registrarPasajero();
             // Realizar acciones adicionales si es necesario
@@ -90,7 +82,6 @@ void MenuConsola::generarReportes() {
 void MenuConsola::limpiarPantalla() {
     std::cout << "\033[2J\033[1;1H"; // Secuencia de escape para limpiar la pantalla en sistemas Unix
 }
-
 int MenuConsola::solicitarOpcion(int min, int max) {
     int opcion;
     while (true) {
@@ -109,7 +100,6 @@ int MenuConsola::solicitarOpcion(int min, int max) {
     }
     return opcion;
 }
-
 std::string MenuConsola::solicitarArchivo(const std::string& tipo) {
     std::string archivo;
     while (true) {

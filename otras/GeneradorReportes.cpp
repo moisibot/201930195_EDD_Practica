@@ -2,9 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>  // para system()
-
 using namespace std;
-
 void GeneradorReportes::generarReporteAvionesDisponibles(const ListaCircularDoble<Avion, string>& aviones) {
     stringstream ss;
     ss << "digraph AvionesDisponibles {\n";
@@ -13,7 +11,6 @@ void GeneradorReportes::generarReporteAvionesDisponibles(const ListaCircularDobl
     for (auto iter = aviones.begin(); iter != aviones.end(); ++iter) {
         ss << generarDotAvion(*iter);
     }
-
     ss << "}\n";
     escribirArchivoDot(ss.str(), "aviones_disponibles");
     ejecutarGraphviz("aviones_disponibles");
@@ -35,5 +32,4 @@ void GeneradorReportes::escribirArchivoDot(const string& contenido, const string
 void GeneradorReportes::ejecutarGraphviz(const string& nombre) {
     system(("dot -Tpng " + nombre + ".dot -o " + nombre + ".png").c_str());
     system(("xdg-open " + nombre + ".png").c_str());
-
 }

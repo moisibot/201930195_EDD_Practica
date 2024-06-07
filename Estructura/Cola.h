@@ -9,19 +9,22 @@ private:
     Nodo<T>* frente;
     Nodo<T>* final;
     int tamaño;
-
 public:
     Cola() : frente(nullptr), final(nullptr), tamaño(0) {}
     ~Cola();
-
     void encolar(T dato);
     T desencolar();
     T verFrente() const;
     bool estaVacia() const { return tamaño == 0; }
     int getTamaño() const { return tamaño; }
-
-    //virtual ~Cola();
 };
+
+template <typename T>
+Cola<T>::~Cola() {
+    while (!estaVacia()) {
+        desencolar();
+    }
+}
 
 template <typename T>
 void Cola<T>::encolar(T dato) {
@@ -46,8 +49,8 @@ T Cola<T>::desencolar() {
     if (tamaño == 0) final = nullptr;
     return dato;
 }
+/*
 template<typename Pasajero>
 Cola<Pasajero>::~Cola() {
-
-}
+}*/
 #endif //CONTROLAEROPUERTO_COLA_H

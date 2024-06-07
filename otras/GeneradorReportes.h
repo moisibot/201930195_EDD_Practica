@@ -1,11 +1,7 @@
-
-
 #ifndef CONTROLAEROPUERTO_GENERADORREPORTES_H
 #define CONTROLAEROPUERTO_GENERADORREPORTES_H
-
 #include <string>
 #include "GestorAeropuerto.h"
-
 class GeneradorReportes {
 public:
     static void generarReporteAvionesDisponibles(const ListaCircularDoble<Avion, string>& aviones);
@@ -21,5 +17,4 @@ private:
     static void escribirArchivoDot(const std::string& contenido, const std::string& nombre);
     static void ejecutarGraphviz(const std::string& nombre);
 };
-
 #endif //CONTROLAEROPUERTO_GENERADORREPORTES_H
