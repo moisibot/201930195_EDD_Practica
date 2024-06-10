@@ -1,0 +1,18 @@
+digraph ReporteCompleto {
+  node [shape=record];
+  subgraph cluster_avionesDisponibles {
+    label="Aviones Disponibles";
+  }
+  subgraph cluster_avionesMantenimiento {
+    label="Aviones en Mantenimiento";
+  }
+  subgraph cluster_colaRegistro {
+    label="Cola de Registro";
+  }
+  subgraph cluster_pilaEquipaje {
+    label="Pila de Equipaje";
+  }
+  subgraph cluster_listaPasajeros {
+    label="Lista de Pasajeros";
+  }
+}

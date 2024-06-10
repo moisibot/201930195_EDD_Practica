@@ -1,0 +1,848 @@
+#ifndef CONTROLAEROPUERTO_COLA_H
+#define CONTROLAEROPUERTO_COLA_H
+#include "Nodo.h"
+#include <stdexcept>
+template <typename T>
+class Cola {
+private:
+    Nodo<T>* frente;
+    Nodo<T>* final;
+    int tamaño;
+public:
+    Cola() : frente(nullptr), final(nullptr), tamaño(0) {}
+    ~Cola();
+    void encolar(T dato);
+    T desencolar();
+    T verFrente() const;
+    bool estaVacia() const { return tamaño == 0; }
+    int getTamaño() const { return tamaño; }
+};
+template <typename T>
+Cola<T>::~Cola() {
+    while (!estaVacia()) {
+        desencolar();
+    }
+}
+template <typename T>
+void Cola<T>::encolar(T dato) {
+    Nodo<T>* nuevoNodo = new Nodo<T>(dato);
+    if (estaVacia()) {
+        frente = final = nuevoNodo;
+    } else {
+        final->siguiente = nuevoNodo;
+        final = nuevoNodo;
+    }
+    tamaño++;
+}
+template <typename T>
+T Cola<T>::desencolar() {
+    if (estaVacia()) throw std::out_of_range("La cola está vacía");
+    T dato = frente->dato;
+    Nodo<T>* temp = frente;
+    frente = frente->siguiente;
+    delete temp;
+    tamaño--;
+    if (tamaño == 0) final = nullptr;
+    return dato;
+}
+template <typename T>
+T Cola<T>::verFrente() const {
+    if (estaVacia()) throw std::out_of_range("La cola está vacía");
+    return frente->dato;
+}
+#endif // CONTROLAEROPUERTO_COLA_H
+#ifndef CONTROLAEROPUERTO_LISTACIRCULARDOBLE_H
+#define CONTROLAEROPUERTO_LISTACIRCULARDOBLE_H
+#include <string>
+#include <stdexcept>
+#include "Nodo.h"
+template <typename T, typename EstadoType>
+class ListaCircularDoble {
+private:
+    Nodo<T>* cabeza;
+    int tamaño;
+public:
+    ListaCircularDoble() : cabeza(nullptr), tamaño(0) {}
+    ~ListaCircularDoble();
+    void insertar(T dato);
+    bool eliminar(T dato);
+    T* buscar(const std::string& numeroRegistro);
+    void mostrar() const;
+    int getTamaño() const { return tamaño; }
+    bool estaVacia() const { return tamaño == 0; }
+    T pop();
+    void moverEntreEstados(T* dato, EstadoType nuevoEstado);
+    class Iterador {
+    private:
+        Nodo<T>* nodo;
+    public:
+        Iterador(Nodo<T>* n) : nodo(n) {}
+        T& operator*() { return nodo->dato; }
+        Iterador& operator++() {
+            nodo = nodo->siguiente;
+            return *this;
+        }
+        bool operator!=(const Iterador& other) const {
+            return nodo != other.nodo;
+        }
+    };
+    Iterador begin() const {
+        return Iterador(cabeza);
+    }
+    Iterador end() const {
+        return Iterador(nullptr);
+    }
+};
+template <typename T, typename EstadoType>
+ListaCircularDoble<T, EstadoType>::~ListaCircularDoble() {
+    if (!cabeza) return;
+    Nodo<T>* actual = cabeza;
+    do {
+        Nodo<T>* temp = actual->siguiente;
+        delete actual;
+        actual = temp;
+    } while (actual != cabeza);
+
+    cabeza = nullptr;
+}
+template <typename T, typename EstadoType>
+void ListaCircularDoble<T, EstadoType>::insertar(T dato) {
+    Nodo<T>* nuevoNodo = new Nodo<T>(dato);
+    if (!cabeza) {
+        cabeza = nuevoNodo;
+        nuevoNodo->siguiente = nuevoNodo;
+        nuevoNodo->anterior = nuevoNodo;
+    } else {
+        Nodo<T>* ultimo = cabeza->anterior;
+        nuevoNodo->siguiente = cabeza;
+        nuevoNodo->anterior = ultimo;
+        ultimo->siguiente = nuevoNodo;
+        cabeza->anterior = nuevoNodo;
+    }
+    tamaño++;
+}
+template <typename T, typename EstadoType>
+T ListaCircularDoble<T, EstadoType>::pop() {
+    if (!cabeza) {
+        throw std::out_of_range("La lista está vacía");
+    }
+    Nodo<T>* temp = cabeza;
+    T dato = temp->dato;
+    if (cabeza == cabeza->siguiente) {
+        cabeza = nullptr;
+    } else {
+        cabeza->anterior->siguiente = cabeza->siguiente;
+        cabeza->siguiente->anterior = cabeza->anterior;
+        cabeza = cabeza->siguiente;
+    }
+    delete temp;
+    tamaño--;
+    return dato;
+}
+template <typename T, typename EstadoType>
+bool ListaCircularDoble<T, EstadoType>::eliminar(T dato) {
+    if (!cabeza) return false;
+    Nodo<T>* actual = cabeza;
+    do {
+        if (actual->dato == dato) {
+            if (actual == cabeza) {
+                if (cabeza == cabeza->siguiente) {
+                    cabeza = nullptr;
+                } else {
+                    cabeza->anterior->siguiente = cabeza->siguiente;
+                    cabeza->siguiente->anterior = cabeza->anterior;
+                    cabeza = cabeza->siguiente;
+                }
+            } else {
+                actual->anterior->siguiente = actual->siguiente;
+                actual->siguiente->anterior = actual->anterior;
+            }
+            delete actual;
+            tamaño--;
+            return true;
+        }
+        actual = actual->siguiente;
+    } while (actual != cabeza);
+    return false;
+}
+template <typename T, typename EstadoType>
+T* ListaCircularDoble<T, EstadoType>::buscar(const std::string& numeroRegistro) {
+    if (!cabeza) return nullptr;
+    Nodo<T>* actual = cabeza;
+    do {
+        if (actual->dato.getNumeroRegistro() == numeroRegistro) {
+            return &(actual->dato);
+        }
+        actual = actual->siguiente;
+    } while (actual != cabeza);
+    return nullptr;
+}
+template <typename T, typename EstadoType>
+void ListaCircularDoble<T, EstadoType>::moverEntreEstados(T* dato, EstadoType nuevoEstado) {
+    if (dato) {
+        dato->setEstado(nuevoEstado);
+        insertar(*dato);
+    }
+}
+#endif // CONTROLAEROPUERTO_LISTACIRCULARDOBLE_H
+#ifndef CONTROLAEROPUERTO_LISTADOBLEENLAZADA_H
+#define CONTROLAEROPUERTO_LISTADOBLEENLAZADA_H
+#include "Nodo.h"
+#include <stdexcept>
+template <typename T>
+class ListaDobleEnlazada {
+private:
+    Nodo<T>* cabeza;
+    Nodo<T>* cola;
+    int tamaño;
+public:
+    ListaDobleEnlazada() : cabeza(nullptr), cola(nullptr), tamaño(0) {}
+    ~ListaDobleEnlazada();
+    void insertar(T dato);
+    bool eliminar(T dato);
+    T* buscar(T dato);
+    void mostrar() const;
+    int getTamaño() const { return tamaño; }
+    bool estaVacia() const { return tamaño == 0; }
+    typedef Nodo<T>* Iterador;
+    Iterador begin() const {
+        return cabeza;
+    }
+    Iterador end() const {
+        return nullptr;
+    }
+};
+template <typename T>
+ListaDobleEnlazada<T>::~ListaDobleEnlazada() {
+    Nodo<T>* actual = cabeza;
+    while (actual) {
+        Nodo<T>* temp = actual;
+        actual = actual->siguiente;
+        delete temp;
+    }
+}
+template <typename T>
+void ListaDobleEnlazada<T>::insertar(T dato) {
+    Nodo<T>* nuevoNodo = new Nodo<T>(dato);
+    if (estaVacia()) {
+        cabeza = cola = nuevoNodo;
+    } else {
+        nuevoNodo->anterior = cola;
+        cola->siguiente = nuevoNodo;
+        cola = nuevoNodo;
+    }
+    tamaño++;
+}
+template <typename T>
+bool ListaDobleEnlazada<T>::eliminar(T dato) {
+    Nodo<T>* actual = cabeza;
+    while (actual) {
+        if (actual->dato == dato) {
+            if (actual->anterior) {
+                actual->anterior->siguiente = actual->siguiente;
+            } else {
+                cabeza = actual->siguiente;
+            }
+            if (actual->siguiente) {
+                actual->siguiente->anterior = actual->anterior;
+            } else {
+                cola = actual->anterior;
+            }
+            delete actual;
+            tamaño--;
+            return true;
+        }
+        actual = actual->siguiente;
+    }
+    return false;
+}
+template <typename T>
+T* ListaDobleEnlazada<T>::buscar(T dato) {
+    Nodo<T>* actual = cabeza;
+    while (actual) {
+        if (actual->dato == dato) {
+            return &actual->dato;
+        }
+        actual = actual->siguiente;
+    }
+    return nullptr;
+}
+#endif // CONTROLAEROPUERTO_LISTADOBLEENLAZADA_H
+
+#ifndef CONTROLAEROPUERTO_NODO_H
+#define CONTROLAEROPUERTO_NODO_H
+template <typename T>
+class Nodo {
+public:
+    T dato;
+    Nodo<T>* siguiente;
+    Nodo<T>* anterior;
+    Nodo(T d) : dato(d), siguiente(nullptr), anterior(nullptr){}
+};
+#endif //CONTROLAEROPUERTO_NODO_H
+
+#ifndef CONTROLAEROPUERTO_PILA_H
+#define CONTROLAEROPUERTO_PILA_H
+#include "Nodo.h"
+#include <stdexcept>
+template <typename T>
+class Pila {
+private:
+    Nodo<T>* tope;
+    int tamaño;
+public:
+    Pila() : tope(nullptr), tamaño(0) {}
+    ~Pila();
+    void push(T dato);
+    T pop();
+    T peek() const;
+    bool estaVacia() const { return tamaño == 0; }
+    int getTamaño() const { return tamaño; }
+};
+template <typename T>
+Pila<T>::~Pila() {
+    while (!estaVacia()) {
+        pop();
+    }
+}
+template <typename T>
+void Pila<T>::push(T dato) {
+    Nodo<T>* nuevoNodo = new Nodo<T>(dato);
+    nuevoNodo->siguiente = tope;
+    tope = nuevoNodo;
+    tamaño++;
+}
+template <typename T>
+T Pila<T>::pop() {
+    if (estaVacia()) throw std::out_of_range("La pila está vacía");
+    Nodo<T>* temp = tope;
+    T dato = temp->dato;
+    tope = tope->siguiente;
+    delete temp;
+    tamaño--;
+    return dato;
+}
+template <typename T>
+T Pila<T>::peek() const {
+    if (estaVacia()) throw std::out_of_range("La pila está vacía");
+    return tope->dato;
+}
+#endif // CONTROLAEROPUERTO_PILA_H
+
+#endif //CONTROLAEROPUERTO_PILA_H
+#include "GeneradorReportes.h"
+#include <fstream>
+#include <sstream>
+#include <cstdlib>  // para system()
+using namespace std;
+void GeneradorReportes::generarReporteAvionesDisponibles(const ListaCircularDoble<Avion, string>& aviones) {
+    stringstream ss;
+    ss << "digraph AvionesDisponibles {\n";
+    ss << "  rankdir=LR;\n";
+    ss << "  node [shape=box];\n";
+    for (auto iter = aviones.begin(); iter != aviones.end(); ++iter) {
+        ss << generarDotAvion(*iter);
+    }
+    ss << "}\n";
+    escribirArchivoDot(ss.str(), "aviones_disponibles");
+    ejecutarGraphviz("aviones_disponibles");
+}
+string GeneradorReportes::generarDotAvion(const Avion& avion) {
+    stringstream ss;
+    ss << "  \"" << avion.getNumeroRegistro() << "\" [label=\"Registro: " << avion.getNumeroRegistro()
+       << "\\nModelo: " << avion.getModelo() << "\\nCapacidad: " << avion.getCapacidad() << "\"];\n";
+    return ss.str();
+}
+void GeneradorReportes::escribirArchivoDot(const string& contenido, const string& nombre) {
+    ofstream archivo(nombre + ".dot");
+    archivo << contenido;
+    archivo.close();
+}
+void GeneradorReportes::ejecutarGraphviz(const string& nombre) {
+    system(("dot -Tpng " + nombre + ".dot -o " + nombre + ".png").c_str());
+    system(("xdg-open " + nombre + ".png").c_str());
+}
+
+#ifndef CONTROLAEROPUERTO_GENERADORREPORTES_H
+#define CONTROLAEROPUERTO_GENERADORREPORTES_H
+#include <string>
+#include "GestorAeropuerto.h"
+class GeneradorReportes {
+public:
+    static void generarReporteAvionesDisponibles(const ListaCircularDoble<Avion, string>& aviones);
+    static void generarReporteAvionesMantenimiento(const ListaCircularDoble<Avion, string>& aviones);
+    static void generarReporteColaRegistro(const Cola<Pasajero>& cola);
+    static void generarReportePilaEquipaje(const Pila<Equipaje>& pila);
+    static void generarReporteListaPasajeros(const ListaDobleEnlazada<Pasajero>& lista);
+
+private:
+    static std::string generarDotAvion(const Avion& avion);
+    static std::string generarDotPasajero(const Pasajero& pasajero);
+    static std::string generarDotEquipaje(const Equipaje& equipaje);
+    static void escribirArchivoDot(const std::string& contenido, const std::string& nombre);
+    static void ejecutarGraphviz(const std::string& nombre);
+};
+#endif //CONTROLAEROPUERTO_GENERADORREPORTES_H
+#include "GestorAeropuerto.h"
+void GestorAeropuerto::cargarAviones(const vector<Avion>& aviones) {
+    for (const auto& avion : aviones) {
+        if (avion.getEstado() == "Disponible")
+            avionesDisponibles.insertar(avion);
+        else
+            avionesMantenimiento.insertar(avion);
+    }
+}
+void GestorAeropuerto::registrarPasajero() {
+    if (!colaRegistro.estaVacia()) {
+        Pasajero p = colaRegistro.desencolar();
+        listaPasajeros.insertar(p);
+        if (p.tieneEquipaje()) {
+            pilaEquipaje.push(Equipaje(p.getNumeroPasaporte(), p.getPesoEquipaje(), &p));
+        }
+    }
+}
+void GestorAeropuerto::asignarVuelosPasajeros() {
+    if (!hayAvionesDisponibles()) return;
+    Avion avion = avionesDisponibles.pop();
+    int asientosAsignados = 0;
+    while (!colaRegistro.estaVacia() && asientosAsignados < avion.getCapacidad()) {
+        Pasajero p = colaRegistro.desencolar();
+        p.setNumeroVuelo(avion.getNumeroRegistro());
+        p.setNumeroAsiento(to_string(asientosAsignados + 1));
+        listaPasajeros.insertar(p);
+        asientosAsignados++;
+    }
+    avionesMantenimiento.insertar(avion);  // Mover a mantenimiento después del vuelo
+}
+void GestorAeropuerto::moverAvion(const std::string& numeroRegistro, const std::string& nuevoEstado) {
+    Avion* avion = avionesDisponibles.buscar(numeroRegistro);
+    if (avion) {
+        avionesDisponibles.eliminar(*avion);
+        avionesDisponibles.moverEntreEstados(avion, nuevoEstado);
+    } else {
+        avion = avionesMantenimiento.buscar(numeroRegistro);
+        if (avion) {
+            avionesMantenimiento.eliminar(*avion);
+            avionesMantenimiento.moverEntreEstados(avion, nuevoEstado);
+        }
+    }
+}
+bool GestorAeropuerto::hayAvionesDisponibles() const {
+    return !avionesDisponibles.estaVacia();
+}
+
+void GestorAeropuerto::cargarPasajeros(const std::vector<Pasajero>& pasajeros) {
+    for (const auto& pasajero : pasajeros) {
+        colaRegistro.encolar(pasajero);
+    }
+}
+Pasajero* GestorAeropuerto::buscarPasajeroPorPasaporte(const std::string& pasaporte) {
+    for (auto it = listaPasajeros.begin(); it != listaPasajeros.end(); it = it->siguiente) {
+        if (it->dato.getNumeroPasaporte() == pasaporte) {
+            return &(it->dato);
+        }
+    }
+    return nullptr;
+}
+#ifndef CONTROLAEROPUERTO_GESTORAEROPUERTO_H
+#define CONTROLAEROPUERTO_GESTORAEROPUERTO_H
+#include <vector>
+#include "../Avion.h"
+#include "../Estructura/ListaCircularDoble.h"
+#include "../Pasajero.h"
+#include "../Equipaje.h"
+#include "../Estructura/Cola.h"
+#include "../Estructura/Pila.h"
+#include "../Estructura/ListaDobleEnlazada.h"
+class GestorAeropuerto {
+private:
+    ListaCircularDoble<Avion, string> avionesDisponibles;
+    ListaCircularDoble<Avion, string> avionesMantenimiento;
+    Cola<Pasajero> colaRegistro;
+    Pila<Equipaje> pilaEquipaje;
+    ListaDobleEnlazada<Pasajero> listaPasajeros;
+public:
+    void cargarAviones(const std::vector<Avion>& aviones);
+    void cargarPasajeros(const std::vector<Pasajero>& pasajeros);
+    void registrarPasajero();
+    void procesarEquipaje();
+    void moverAvion(const std::string& numeroRegistro, const std::string& nuevoEstado);
+    Pasajero* buscarPasajeroPorPasaporte(const std::string& pasaporte);
+    void asignarVuelosPasajeros();
+    bool hayAvionesDisponibles() const;
+    void cambiarEstadoAvion(const std::string& numeroRegistro, const std::string& nuevoEstado);
+};
+#endif //CONTROLAEROPUERTO_GESTORAEROPUERTO_H
+#include "GestorArchivos.h"
+#include <fstream>
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+using namespace std;
+vector<Avion> GestorArchivos::cargarAvionesDesdeJSON(const string& rutaArchivo) {
+    vector<Avion> aviones;
+    string contenido = leerArchivo(rutaArchivo);
+    validarJSON(contenido);
+    json data = json::parse(contenido);
+    for (const auto& avion : data) {
+        aviones.emplace_back(
+                avion["numero_de_registro"],
+                avion["modelo"],
+                avion["capacidad"],
+                avion.value("estado", "Disponible")
+        );
+    }
+    return aviones;
+}
+vector<Pasajero> GestorArchivos::cargarPasajerosDesdeJSON(const string& rutaArchivo) {
+    vector<Pasajero> pasajeros;
+    string contenido = leerArchivo(rutaArchivo);
+    validarJSON(contenido);
+    json data = json::parse(contenido);
+    for (const auto& pasajero : data) {
+        pasajeros.emplace_back(
+                pasajero["numero_de_pasaporte"],
+                pasajero["nombre"],
+                "", // Apellido vacío
+                pasajero["vuelo"],
+                to_string(pasajero["asiento"]),
+                pasajero.value("equipaje_facturado", 0)
+        );
+    }
+    return pasajeros;
+}
+std::string GestorArchivos::leerArchivo(const std::string& rutaArchivo) {
+    std::ifstream file(rutaArchivo);
+    std::string contenido((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    return contenido;
+}
+void GestorArchivos::validarJSON(const std::string& json) {
+    if (json.empty() || json.front() != '[' || json.back() != ']') {
+        throw std::invalid_argument("JSON inválido");
+    }
+}
+#ifndef CONTROLAEROPUERTO_GESTORARCHIVOS_H
+#define CONTROLAEROPUERTO_GESTORARCHIVOS_H
+#include <vector>
+#include <string>
+#include "../Avion.h"
+#include "../Pasajero.h"
+
+class GestorArchivos {
+public:
+    static std::vector<Avion> cargarAvionesDesdeJSON(const std::string& archivo);
+    static std::vector<Pasajero> cargarPasajerosDesdeJSON(const std::string& archivo);
+    static std::vector<std::string> leerComandosDeArchivo(const std::string& archivo);
+private:
+    static std::string leerArchivo(const std::string& archivo);
+    static void validarJSON(const std::string& json);
+};
+#endif //CONTROLAEROPUERTO_GESTORARCHIVOS_H
+
+#include "Avion.h"
+#include <iostream>
+Avion::Avion(string reg, string mod, int cap, string est)
+        : numeroRegistro(reg), modelo(mod), capacidad(cap), estado(est) {}
+// get
+string Avion::getNumeroRegistro() const { return numeroRegistro; }
+string Avion::getModelo() const { return modelo; }
+int Avion::getCapacidad() const { return capacidad; }
+string Avion::getEstado() const { return estado; }
+// set
+void Avion::setNumeroRegistro(string reg) { numeroRegistro = reg; }
+void Avion::setModelo(string mod) { modelo = mod; }
+void Avion::setCapacidad(int cap) { capacidad = cap; }
+void Avion::setEstado(string est) { estado = est; }
+// info de los aviones
+void Avion::mostrarInfo() const {
+    cout << "Avion " << numeroRegistro << " - " << modelo
+         << " (Capacidad: " << capacidad << ", Estado: " << estado << ")" << endl;
+}
+bool Avion::operator==(const Avion& otro) const {
+    return numeroRegistro == otro.numeroRegistro;
+}
+bool Avion::estaDisponible() const { return estado == "Disponible"; }
+#ifndef CONTROLAEROPUERTO_AVION_H
+#define CONTROLAEROPUERTO_AVION_H
+#include <string>
+using namespace std;
+class Avion {
+private:
+    string numeroRegistro;
+    string modelo;
+    int capacidad;
+    string estado;  // "Disponible" o "Mantenimiento"
+public:
+    Avion(string reg, string mod, int cap, string est = "Disponible");
+    // get
+    string getNumeroRegistro() const;
+    string getModelo() const;
+    int getCapacidad() const;
+    string getEstado() const;
+    // set
+    void setNumeroRegistro(string reg);
+    void setModelo(string mod);
+    void setCapacidad(int cap);
+    void setEstado(string est);
+    //  info de los aviones
+    void mostrarInfo() const;
+    bool estaDisponible() const;
+    bool operator==(const Avion& otro) const;
+};
+#endif //CONTROLAEROPUERTO_AVION_H
+#include "Equipaje.h"
+#include <iostream>
+Equipaje::Equipaje(string id, int p, Pasajero* prop)
+        : idEquipaje(id), peso(p), propietario(prop) {}
+// get
+string Equipaje::getIdEquipaje() const { return idEquipaje; }
+int Equipaje::getPeso() const { return peso; }
+Pasajero* Equipaje::getPropietario() const { return propietario; }
+// seet
+void Equipaje::setIdEquipaje(string id) { idEquipaje = id; }
+void Equipaje::setPeso(int p) { peso = p; }
+void Equipaje::setPropietario(Pasajero* prop) { propietario = prop; }
+// mostrar informacion de los equipajes
+void Equipaje::mostrarInfo() const {
+    cout << "Equipaje ID: " << idEquipaje << " (Peso: " << peso << " kg)" << endl
+         << "  Propietario: " << getInfoPropietario() << endl;
+}
+string Equipaje::getInfoPropietario() const {
+    return propietario ? propietario->getNombreCompleto() + " - Vuelo: " + propietario->getNumeroVuelo()
+                       : "Desconocido";
+}
+#ifndef CONTROLAEROPUERTO_EQUIPAJE_H
+#define CONTROLAEROPUERTO_EQUIPAJE_H
+#include <string>
+#include "Pasajero.h"
+using namespace std;
+class Equipaje {
+private:
+    string idEquipaje;
+    int peso;
+    Pasajero* propietario;
+public:
+    Equipaje(string id, int p, Pasajero* prop);
+    // get
+    string getIdEquipaje() const;
+    int getPeso() const;
+    Pasajero* getPropietario() const;
+    // set
+    void setIdEquipaje(string id);
+    void setPeso(int p);
+    void setPropietario(Pasajero* prop);
+    //  mostrar informacion de los equipajes
+    void mostrarInfo() const;
+    string getInfoPropietario() const;
+};
+#endif //CONTROLAEROPUERTO_EQUIPAJE_H
+#include "Pasajero.h"
+#include <iostream>
+Pasajero::Pasajero(string pasaporte, string nom, string ape, string vuelo, string asiento, int pesoEq)
+        : numeroPasaporte(pasaporte), nombre(nom), apellido(ape), numeroVuelo(vuelo),
+          numeroAsiento(asiento), pesoEquipaje(pesoEq) {}
+// get
+string Pasajero::getNumeroPasaporte() const { return numeroPasaporte; }
+string Pasajero::getNombre() const { return nombre; }
+string Pasajero::getApellido() const { return apellido; }
+string Pasajero::getNombreCompleto() const { return nombre + " " + apellido; }
+string Pasajero::getNumeroVuelo() const { return numeroVuelo; }
+string Pasajero::getNumeroAsiento() const { return numeroAsiento; }
+int Pasajero::getPesoEquipaje() const { return pesoEquipaje; }
+// set
+void Pasajero::setNumeroPasaporte(string pasaporte) { numeroPasaporte = pasaporte; }
+void Pasajero::setNombre(string nom) { nombre = nom; }
+void Pasajero::setApellido(string ape) { apellido = ape; }
+void Pasajero::setNumeroVuelo(string vuelo) { numeroVuelo = vuelo; }
+void Pasajero::setNumeroAsiento(string asiento) { numeroAsiento = asiento; }
+void Pasajero::setPesoEquipaje(int peso) { pesoEquipaje = peso; }
+// varios métodos
+void Pasajero::mostrarInfo() const {
+    cout << "Pasajero: " << getNombreCompleto() << " (Pasaporte: " << numeroPasaporte << ")" << endl
+         << "  Vuelo: " << numeroVuelo << ", Asiento: " << numeroAsiento << endl
+         << "  Equipaje: " << (tieneEquipaje() ? to_string(pesoEquipaje) + " kg" : "No") << endl;
+}
+bool Pasajero::tieneEquipaje() const { return pesoEquipaje > 0; }
+#ifndef CONTROLAEROPUERTO_PASAJERO_H
+#define CONTROLAEROPUERTO_PASAJERO_H
+#include <string>
+using namespace std;
+class Pasajero {
+private:
+    string numeroPasaporte;
+    string nombre;
+    string apellido;
+    string numeroVuelo;
+    string numeroAsiento;
+    int pesoEquipaje;  // 0 si no tiene equipaje
+public:
+    Pasajero(string pasaporte, string nom, string ape, string vuelo, string asiento, int pesoEq = 0);
+    // get
+    string getNumeroPasaporte() const;
+    string getNombre() const;
+    string getApellido() const;
+    string getNombreCompleto() const;
+    string getNumeroVuelo() const;
+    string getNumeroAsiento() const;
+    int getPesoEquipaje() const;
+    // set
+    void setNumeroPasaporte(string pasaporte);
+    void setNombre(string nom);
+    void setApellido(string ape);
+    void setNumeroVuelo(string vuelo);
+    void setNumeroAsiento(string asiento);
+    void setPesoEquipaje(int peso);
+    // varios métodos
+    void mostrarInfo() const;
+    bool tieneEquipaje() const;
+};
+#endif //CONTROLAEROPUERTO_PASAJERO_H
+#include "MenuConsola.h"
+#include <iostream>
+#include <limits>
+#include <fstream>
+#include <filesystem>
+
+using namespace std;
+
+void MenuConsola::mostrarMenuPrincipal() {
+    while (true) {
+        limpiarPantalla();
+        cout << "=== SISTEMA DE GESTIÓN DE AEROPUERTO ===" << endl;
+        cout << "1. Cargar Archivos" << endl;
+        cout << "2. Realizar Movimientos" << endl;
+        cout << "3. Consultar Pasajero" << endl;
+        cout << "4. Generar Reportes" << endl;
+        cout << "5. Salir" << endl;
+        int opcion = solicitarOpcion(1, 5);
+        switch (opcion) {
+            case 1: cargarArchivos(); break;
+            case 2: realizarMovimientos(); break;
+            case 3: consultarPasajero(); break;
+            case 4: //generarReportes(); break;
+            case 5: return;
+        }
+    }
+}
+void MenuConsola::cargarArchivos() {
+    string archivoAviones = solicitarArchivo("aviones");
+    string archivoPasajeros = solicitarArchivo("pasajeros");
+    auto aviones = GestorArchivos::cargarAvionesDesdeJSON(archivoAviones);
+    auto pasajeros = GestorArchivos::cargarPasajerosDesdeJSON(archivoPasajeros);
+    aeropuerto.cargarAviones(aviones);
+    aeropuerto.cargarPasajeros(pasajeros);
+    cout << "Archivos cargados exitosamente." << endl;
+    system("pause");
+}
+void MenuConsola::consultarPasajero() {
+    cout << "Ingrese el número de pasaporte: ";
+    string pasaporte;
+    cin >> pasaporte;
+    Pasajero* p = aeropuerto.buscarPasajeroPorPasaporte(pasaporte);
+    if (p) {
+        p->mostrarInfo();
+    } else {
+        cout << "Pasajero no encontrado." << endl;
+    }
+    system("pause");
+}
+void MenuConsola::realizarMovimientos() {
+    string comando;
+    while (true) {
+        cout << "Ingrese un comando (IngresoEquipaje, MantenimientoAviones, Salir): ";
+        cin >> comando;
+        if (comando == "IngresoEquipaje") {
+            aeropuerto.registrarPasajero();
+        } else if (comando == "MantenimientoAviones") {
+            string numeroRegistro, nuevoEstado;
+            cout << "Ingrese el número de registro del avión: ";
+            cin >> numeroRegistro;
+            cout << "Ingrese el nuevo estado (Disponible o Mantenimiento): ";
+            cin >> nuevoEstado;
+            aeropuerto.moverAvion(numeroRegistro, nuevoEstado);
+        } else if (comando == "Salir") {
+            break;
+        } else {
+            cout << "Comando inválido. Intente nuevamente." << endl;
+        }
+    }
+}
+/*
+void MenuConsola::generarReportes() {
+    cout << "Generando reportes..." << endl;
+    GeneradorReportes::generarReporteAvionesDisponibles(aeropuerto.getAvionesDisponibles());
+    GeneradorReportes::generarReporteAvionesMantenimiento(aeropuerto.getAvionesMantenimiento());
+    GeneradorReportes::generarReporteColaRegistro(aeropuerto.getColaRegistro());
+    GeneradorReportes::generarReportePilaEquipaje(aeropuerto.getPilaEquipaje());
+    GeneradorReportes::generarReporteListaPasajeros(aeropuerto.getListaPasajeros());
+    cout << "Reportes generados exitosamente." << endl;
+}*/
+
+void MenuConsola::limpiarPantalla() {
+    std::cout << "\033[2J\033[1;1H"; // Secuencia de escape para limpiar la pantalla en sistemas Unix
+}
+int MenuConsola::solicitarOpcion(int min, int max) {
+    int opcion;
+    while (true) {
+        std::cout << "Ingrese una opción (" << min << "-" << max << "): ";
+        std::cin >> opcion;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Opción inválida. Intente nuevamente." << std::endl;
+        } else if (opcion >= min && opcion <= max) {
+            break;
+        } else {
+            std::cout << "Opción fuera de rango. Intente nuevamente." << std::endl;
+        }
+    }
+    return opcion;
+}
+std::string MenuConsola::solicitarArchivo(const std::string& tipo) {
+    std::string archivo;
+    while (true) {
+        std::cout << "Ingrese el nombre del archivo de " << tipo << ": ";
+        std::cin >> archivo;
+
+        // Construir la ruta completa del archivo
+        std::string rutaArchivo = "/home/moisibot/CLionProjects/ControlAeropuerto/" + archivo;
+
+        // Verificar si el archivo existe
+        std::ifstream file(rutaArchivo);
+        if (file.good()) {
+            break;
+        } else {
+            std::cout << "El archivo no existe. Intente nuevamente." << std::endl;
+        }
+    }
+    return archivo;
+}
+
+#ifndef CONTROLAEROPUERTO_MENUCONSOLA_H
+#define CONTROLAEROPUERTO_MENUCONSOLA_H
+
+
+#include "otras/GestorAeropuerto.h"
+#include "otras/GestorArchivos.h"
+#include "otras/GeneradorReportes.h"
+#include "otras/GestorAeropuerto.h"
+
+class MenuConsola {
+private:
+    GestorAeropuerto& aeropuerto;
+
+public:
+    MenuConsola(GestorAeropuerto& gestor) : aeropuerto(gestor) {}
+
+    void mostrarMenuPrincipal();
+    void cargarArchivos();
+    void realizarMovimientos();
+    void consultarPasajero();
+    void generarReportes();
+
+private:
+    void limpiarPantalla();
+    int solicitarOpcion(int min, int max);
+    string solicitarArchivo(const string& tipo);
+};
+
+#endif //CONTROLAEROPUERTO_MENUCONSOLA_H

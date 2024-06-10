@@ -56,36 +56,29 @@ build CMakeFiles/ControlAeropuerto.dir/main.cpp.o: CXX_COMPILER__ControlAeropuer
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
   OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir
 
-build CMakeFiles/ControlAeropuerto.dir/Avion.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Avion.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Avion.cpp.o.d
+build CMakeFiles/ControlAeropuerto.dir/Objetos/Avion.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Avion.cpp || cmake_object_order_depends_target_ControlAeropuerto
+  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Objetos/Avion.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir
+  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/Objetos
 
-build CMakeFiles/ControlAeropuerto.dir/Pasajero.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Pasajero.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Pasajero.cpp.o.d
+build CMakeFiles/ControlAeropuerto.dir/Objetos/Pasajero.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Pasajero.cpp || cmake_object_order_depends_target_ControlAeropuerto
+  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Objetos/Pasajero.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir
+  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/Objetos
 
-build CMakeFiles/ControlAeropuerto.dir/Equipaje.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Equipaje.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Equipaje.cpp.o.d
+build CMakeFiles/ControlAeropuerto.dir/Objetos/Equipaje.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Equipaje.cpp || cmake_object_order_depends_target_ControlAeropuerto
+  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Objetos/Equipaje.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir
+  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/Objetos
 
-build CMakeFiles/ControlAeropuerto.dir/Estructura/Nodo.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Nodo.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Estructura/Nodo.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
-  OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/Estructura
-
-build CMakeFiles/ControlAeropuerto.dir/Estructura/ListaDobleEnlazada.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Estructura/ListaDobleEnlazada.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Estructura/ListaDobleEnlazada.cpp.o.d
+build CMakeFiles/ControlAeropuerto.dir/Estructura/ListaDoblementeEnlazada.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Estructura/ListaDoblementeEnlazada.cpp || cmake_object_order_depends_target_ControlAeropuerto
+  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Estructura/ListaDoblementeEnlazada.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
@@ -112,29 +105,15 @@ build CMakeFiles/ControlAeropuerto.dir/Estructura/Cola.cpp.o: CXX_COMPILER__Cont
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
   OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/Estructura
 
-build CMakeFiles/ControlAeropuerto.dir/otras/GestorArchivos.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/otras/GestorArchivos.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/otras/GestorArchivos.cpp.o.d
+build CMakeFiles/ControlAeropuerto.dir/Estructura/Nodo.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Nodo.cpp || cmake_object_order_depends_target_ControlAeropuerto
+  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Estructura/Nodo.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/otras
+  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/Estructura
 
-build CMakeFiles/ControlAeropuerto.dir/otras/GestorAeropuerto.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/otras/GestorAeropuerto.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/otras/GestorAeropuerto.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
-  OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/otras
-
-build CMakeFiles/ControlAeropuerto.dir/otras/GeneradorReportes.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/otras/GeneradorReportes.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/otras/GeneradorReportes.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
-  OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
-  OBJECT_FILE_DIR = CMakeFiles/ControlAeropuerto.dir/otras
-
-build CMakeFiles/ControlAeropuerto.dir/MenuConsola.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/MenuConsola.cpp || cmake_object_order_depends_target_ControlAeropuerto
-  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/MenuConsola.cpp.o.d
+build CMakeFiles/ControlAeropuerto.dir/Reportes.cpp.o: CXX_COMPILER__ControlAeropuerto_unscanned_Debug /home/moisibot/CLionProjects/ControlAeropuerto/Reportes.cpp || cmake_object_order_depends_target_ControlAeropuerto
+  DEP_FILE = CMakeFiles/ControlAeropuerto.dir/Reportes.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/home/moisibot/CLionProjects/ControlAeropuerto/include -I/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
@@ -148,7 +127,7 @@ build CMakeFiles/ControlAeropuerto.dir/MenuConsola.cpp.o: CXX_COMPILER__ControlA
 #############################################
 # Link the executable ControlAeropuerto
 
-build ControlAeropuerto: CXX_EXECUTABLE_LINKER__ControlAeropuerto_Debug CMakeFiles/ControlAeropuerto.dir/main.cpp.o CMakeFiles/ControlAeropuerto.dir/Avion.cpp.o CMakeFiles/ControlAeropuerto.dir/Pasajero.cpp.o CMakeFiles/ControlAeropuerto.dir/Equipaje.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/Nodo.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/ListaDobleEnlazada.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/ListaCircularDoble.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/Pila.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/Cola.cpp.o CMakeFiles/ControlAeropuerto.dir/otras/GestorArchivos.cpp.o CMakeFiles/ControlAeropuerto.dir/otras/GestorAeropuerto.cpp.o CMakeFiles/ControlAeropuerto.dir/otras/GeneradorReportes.cpp.o CMakeFiles/ControlAeropuerto.dir/MenuConsola.cpp.o
+build ControlAeropuerto: CXX_EXECUTABLE_LINKER__ControlAeropuerto_Debug CMakeFiles/ControlAeropuerto.dir/main.cpp.o CMakeFiles/ControlAeropuerto.dir/Objetos/Avion.cpp.o CMakeFiles/ControlAeropuerto.dir/Objetos/Pasajero.cpp.o CMakeFiles/ControlAeropuerto.dir/Objetos/Equipaje.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/ListaDoblementeEnlazada.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/ListaCircularDoble.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/Pila.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/Cola.cpp.o CMakeFiles/ControlAeropuerto.dir/Estructura/Nodo.cpp.o CMakeFiles/ControlAeropuerto.dir/Reportes.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/ControlAeropuerto.dir
   POST_BUILD = :

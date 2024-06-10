@@ -1,0 +1,7 @@
+digraph AvionesDisponibles {
+  node [shape=record];
+  nodo0x55955a8999a0 [label="{{N67890}|{Vuelo: A104\nModelo: Boeing 787\nFabricante: Boeing\nAño: 2020\nCapacidad: 242\nPeso Max. Despegue: 254000\nAerolinea: AirlineZ\nEstado: Disponible}}"];
+  nodo0x55955a8999a0 -> nodo0x55955a899ab0;
+  nodo0x55955a899ab0 [label="{{N13579}|{Vuelo: A106\nModelo: Boeing 777\nFabricante: Boeing\nAño: 2012\nCapacidad: 396\nPeso Max. Despegue: 351000\nAerolinea: AirlineX\nEstado: Disponible}}"];
+  nodo0x55955a899ab0 -> nodo0x55955a8999a0;
+}

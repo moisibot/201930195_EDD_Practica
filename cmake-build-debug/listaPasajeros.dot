@@ -1,0 +1,12 @@
+digraph ListaPasajeros {
+  node [shape=record];
+  nodo0 [label="{{P12345678}|{Nombre: John Doe\nVuelo: A100\nAsiento: 12\nDestino: New York\nOrigen: Los Angeles\nEquipaje: 2}}"];
+  nodo0 -> nodo1;
+  nodo1 [label="{{P98765432}|{Nombre: Jane Smith\nVuelo: A100\nAsiento: 5\nDestino: Londres\nOrigen: Paris\nEquipaje: 1}}"];
+  nodo1 -> nodo2;
+  nodo2 [label="{{P45678901}|{Nombre: Carlos Rodríguez\nVuelo: A102\nAsiento: 23\nDestino: Ciudad de Mexico\nOrigen: Miami\nEquipaje: 0}}"];
+  nodo2 -> nodo3;
+  nodo3 [label="{{P23456789}|{Nombre: Liu Wei\nVuelo: A104\nAsiento: 8\nDestino: Beijing\nOrigen: San Francisco\nEquipaje: 1}}"];
+  nodo3 -> nodo4;
+  nodo4 [label="{{P34567890}|{Nombre: Ahmed Al-Farsi\nVuelo: A104\nAsiento: 1\nDestino: Dubai\nOrigen: New York\nEquipaje: 3}}"];
+}

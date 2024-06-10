@@ -9,28 +9,23 @@ include_directories(extern/json/single_include)
 file(GLOB SOURCES "src/*.cpp")
 
 add_executable(ControlAeropuerto main.cpp
-        Avion.cpp
-        Avion.h
-        Pasajero.cpp
-        Pasajero.h
-        Equipaje.cpp
-        Equipaje.h
-        Estructura/Nodo.cpp
-        Estructura/Nodo.h
-        Estructura/ListaDobleEnlazada.cpp
-        Estructura/ListaDobleEnlazada.h
+        Objetos/Avion.cpp
+        Objetos/Avion.h
+        Objetos/Pasajero.cpp
+        Objetos/Pasajero.h
+        Objetos/Equipaje.cpp
+        Objetos/Equipaje.h
+        Estructura/ListaDoblementeEnlazada.cpp
+        Estructura/ListaDoblementeEnlazada.h
         Estructura/ListaCircularDoble.cpp
         Estructura/ListaCircularDoble.h
         Estructura/Pila.cpp
         Estructura/Pila.h
         Estructura/Cola.cpp
         Estructura/Cola.h
-        otras/GestorArchivos.cpp
-        otras/GestorArchivos.h
-        otras/GestorAeropuerto.cpp
-        otras/GestorAeropuerto.h
-        otras/GeneradorReportes.cpp
-        otras/GeneradorReportes.h
-        MenuConsola.cpp
-        MenuConsola.h
+        Estructura/Nodo.cpp
+        Estructura/Nodo.h
+        Reportes.cpp
+        Reportes.h
+
 )
