@@ -96,14 +96,16 @@ void generarReportePilaEquipaje(Pila& pilaEquipaje, const std::string& nombreArc
         archivo << "  node [shape=record];" << std::endl;
 
         Equipaje* actual = pilaEquipaje.getCima();
+        Equipaje* anterior = nullptr;
         int i = 0;
         while (actual) {
             archivo << "  nodo" << i << " [label=\"{Cantidad: " << actual->getCantidad() << "}\"];" << std::endl;
 
-            if (actual->getSiguiente()) {
-                archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
+            if (anterior) {
+                archivo << "  nodo" << i << " -> nodo" << (i - 1) << ";" << std::endl;
             }
 
+            anterior = actual;
             actual = actual->getSiguiente();
             i++;
         }

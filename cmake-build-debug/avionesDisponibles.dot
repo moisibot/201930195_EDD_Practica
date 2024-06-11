@@ -1,9 +1,7 @@
 digraph AvionesDisponibles {
   node [shape=record];
-  nodo0x5637fa0edde0 [label="{{N12345}|{Vuelo: A100\nModelo: Boeing 737\nFabricante: Boeing\nAño: 2015\nCapacidad: 180\nPeso Max. Despegue: 79000\nAerolinea: AirlineX\nEstado: Disponible}}"];
-  nodo0x5637fa0edde0 -> nodo0x5637fa0ef9a0;
-  nodo0x5637fa0ef9a0 [label="{{N67890}|{Vuelo: A104\nModelo: Boeing 787\nFabricante: Boeing\nAño: 2020\nCapacidad: 242\nPeso Max. Despegue: 254000\nAerolinea: AirlineZ\nEstado: Disponible}}"];
-  nodo0x5637fa0ef9a0 -> nodo0x5637fa0efab0;
-  nodo0x5637fa0efab0 [label="{{N13579}|{Vuelo: A106\nModelo: Boeing 777\nFabricante: Boeing\nAño: 2012\nCapacidad: 396\nPeso Max. Despegue: 351000\nAerolinea: AirlineX\nEstado: Disponible}}"];
-  nodo0x5637fa0efab0 -> nodo0x5637fa0edde0;
+  nodo0x5614ed2709a0 [label="{{N67890}|{Vuelo: A104\nModelo: Boeing 787\nFabricante: Boeing\nAño: 2020\nCapacidad: 242\nPeso Max. Despegue: 254000\nAerolinea: AirlineZ\nEstado: Disponible}}"];
+  nodo0x5614ed2709a0 -> nodo0x5614ed270ab0;
+  nodo0x5614ed270ab0 [label="{{N13579}|{Vuelo: A106\nModelo: Boeing 777\nFabricante: Boeing\nAño: 2012\nCapacidad: 396\nPeso Max. Despegue: 351000\nAerolinea: AirlineX\nEstado: Disponible}}"];
+  nodo0x5614ed270ab0 -> nodo0x5614ed2709a0;
 }

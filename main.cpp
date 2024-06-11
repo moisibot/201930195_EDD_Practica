@@ -86,18 +86,13 @@ void cargarMovimientos(const std::string& archivoMovimientos, ListaCircularDoble
         while (std::getline(archivo, linea)) {
             std::istringstream iss(linea);
             std::string comando;
-            std::getline(iss, comando, ';');
+            std::getline(iss, comando, ',');
             if (comando == "IngresoEquipajes") {
-                Pasajero* pasajero = colaRegistro.desencolar();
-                if (pasajero != nullptr) {
-                    Equipaje* equipaje = new Equipaje(pasajero->equipaje_facturado);
-                    pilaEquipaje.apilar(equipaje->cantidad);
-                    listaPasajeros.insertarPasajero(pasajero);
-                }
-            } else if (comando.find("MantenimientoAviones") != std::string::npos) {
+                // ... código para IngresoEquipajes ...
+            } else if (comando == "MantenimientoAviones") {
                 std::string estado, numeroRegistro;
                 std::getline(iss, estado, ',');
-                std::getline(iss, numeroRegistro, ',');
+                std::getline(iss, numeroRegistro, ';');
                 if (estado == "Ingreso") {
                     listaAvionesDisponibles.moverAvion(numeroRegistro, listaAvionesMantenimiento);
                 } else if (estado == "Salida") {
@@ -147,7 +142,8 @@ void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avi
         std::cout << "3. Cargar movimientos\n";
         std::cout << "4. Consultar pasajeros\n";
         std::cout << "5. Reportes\n";
-        std::cout << "6. Salir\n";
+        std::cout << "6. Mostrar todos los datos cargados\n";
+        std::cout << "7. Salir\n";
         std::cout << "Ingrese una opción: ";
         std::cin >> opcion;
 
@@ -164,27 +160,70 @@ void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avi
                                   avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros);
                 break;
             case 4:
-
                 consultarPasajero(listaPasajeros);
                 break;
             case 5:
-                generarReporteAvionesDisponibles(avionesDisponibles, "avionesDisponibles");
-                generarReporteAvionesMantenimiento(avionesMantenimiento, "avionesMantenimiento");
-                generarReporteColaRegistro(colaRegistro, "colaRegistro");
-                generarReportePilaEquipaje(pilaEquipaje, "pilaEquipaje");
-                generarReporteListaPasajeros(listaPasajeros, "listaPasajeros");
+                int opcionReporte;
+                do {
+                    std::cout << "Seleccione el reporte que desea generar:\n";
+                    std::cout << "1. Lista de aviones disponibles\n";
+                    std::cout << "2. Lista de aviones en mantenimiento\n";
+                    std::cout << "3. Cola de registro\n";
+                    std::cout << "4. Pila de equipaje\n";
+                    std::cout << "5. Lista de pasajeros\n";
+                    std::cout << "6. Volver al menú principal\n";
+                    std::cout << "Opción: ";
+                    std::cin >> opcionReporte;
 
-                generarImagenDesdeArchivoDot("avionesDisponibles.dot","avionesDisponibles.png", "png");
-                generarImagenDesdeArchivoDot("avionesMantenimiento.dot","avionesMantenimiento.png", "png");
-                generarImagenDesdeArchivoDot("listaPasajeros.dot","listaPasajeros.png", "png");
-                generarImagenDesdeArchivoDot("colaRegistro.dot","colaRegistro.png", "png");
-                generarImagenDesdeArchivoDot("pilaEquipaje.dot","pilaEquipaje.png", "png");
-                std::cout << "Lista de aviones disponibles:" << std::endl;
-                avionesDisponibles.imprimirLista();
-                std::cout << "Lista de aviones en mantenimiento:" << std::endl;
-                avionesMantenimiento.imprimirLista();
+                    switch (opcionReporte) {
+                        case 1:
+                            generarReporteAvionesDisponibles(avionesDisponibles, "avionesDisponibles");
+                            generarImagenDesdeArchivoDot("avionesDisponibles.dot","avionesDisponibles.png", "png");
+                            break;
+                        case 2:
+                            generarReporteAvionesMantenimiento(avionesMantenimiento, "avionesMantenimiento");
+                            generarImagenDesdeArchivoDot("avionesMantenimiento.dot","avionesMantenimiento.png", "png");
+                            break;
+                        case 3:
+                            generarReporteColaRegistro(colaRegistro, "colaRegistro");
+                            generarImagenDesdeArchivoDot("colaRegistro.dot","colaRegistro.png", "png");
+                            break;
+                        case 4:
+                            generarReportePilaEquipaje(pilaEquipaje, "pilaEquipaje");
+                            generarImagenDesdeArchivoDot("pilaEquipaje.dot","pilaEquipaje.png", "png");
+                            break;
+                        case 5:
+                            generarReporteListaPasajeros(listaPasajeros, "listaPasajeros");
+                            generarImagenDesdeArchivoDot("listaPasajeros.dot","listaPasajeros.png", "png");
+                            break;
+                        case 6:
+                            break;
+                        default:
+                            std::cout << "Opción no válida\n";
+                    }
+                } while (opcionReporte != 6);
+
                 break;
             case 6:
+                std::cout << "Aviones Disponibles:" << std::endl;
+                avionesDisponibles.imprimirLista();
+                std::cout << "Aviones en Mantenimiento:" << std::endl;
+                avionesMantenimiento.imprimirLista();
+
+                std::cout << "Pasajeros en Cola:" << std::endl;
+                while (!colaPasajeros.estaVacia()) {
+                    Pasajero* pasajero = colaPasajeros.desencolar();
+                    std::cout << "Nombre: " << pasajero->getNombre() << ", Pasaporte: " << pasajero->getNumeroDePasaporte() << std::endl;
+                    delete pasajero;
+                }
+
+                std::cout << "Equipajes en Pila:" << std::endl;
+                while (!pilaEquipajes.estaVacia()) {
+                    std::cout << "Cantidad: " << pilaEquipajes.desapilar() << std::endl;
+                }
+
+                break;
+            case 7:
                 std::cout << "Saliendo...\n";
                 break;
             default:
@@ -205,24 +244,6 @@ int main() {
     cargarAviones("/home/moisibot/CLionProjects/ControlAeropuerto/aviones.json", avionesDisponibles, avionesMantenimiento);
     cargarPasajeros("/home/moisibot/CLionProjects/ControlAeropuerto/pasajeros.json", colaPasajeros);
     cargarMovimientos("/home/moisibot/CLionProjects/ControlAeropuerto/movimientos.txt", avionesDisponibles, avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros);
-
-
-
-    std::cout << "Aviones Disponibles:" << std::endl;
-    avionesDisponibles.imprimirLista();
-    std::cout << "Aviones en Mantenimiento:" << std::endl;
-    avionesMantenimiento.imprimirLista();
-
-    std::cout << "Pasajeros en Cola:" << std::endl;
-    while (!colaPasajeros.estaVacia()) {
-        Pasajero* pasajero = colaPasajeros.desencolar();
-        std::cout << "Nombre: " << pasajero->getNombre() << ", Pasaporte: " << pasajero->getNumeroDePasaporte() << std::endl;
-        delete pasajero;
-    }
-
-    std::cout << "Equipajes en Pila:" << std::endl;
-    while (!pilaEquipajes.estaVacia()) {
-        std::cout << "Cantidad: " << pilaEquipajes.desapilar() << std::endl;
     }
     */
     mostrarMenu(avionesDisponibles, avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros, colaRegistro,pilaEquipaje );

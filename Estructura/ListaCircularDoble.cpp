@@ -108,7 +108,6 @@ NodoAvion* ListaCircularDoble::buscarAvion(const std::string& numeroRegistro) {
 void ListaCircularDoble::moverAvion(const std::string& numeroRegistro, ListaCircularDoble& otraLista) {
     NodoAvion* nodoAvion = buscarAvion(numeroRegistro);
     if (nodoAvion) {
-        // Eliminar el nodo de la lista actual
         if (nodoAvion == cabeza) {
             if (cabeza->siguiente == cabeza) {
                 cabeza = nullptr;
@@ -117,13 +116,12 @@ void ListaCircularDoble::moverAvion(const std::string& numeroRegistro, ListaCirc
                 cabeza = cabeza->siguiente;
                 cabeza->anterior = ultimo;
                 ultimo->siguiente = cabeza;
+
             }
         } else {
             nodoAvion->anterior->siguiente = nodoAvion->siguiente;
             nodoAvion->siguiente->anterior = nodoAvion->anterior;
         }
-
-        // Insertar el nodo en la otra lista
         otraLista.insertarNodo(nodoAvion);
     }
 }
