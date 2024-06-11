@@ -1,3 +1,0 @@
-digraph PilaEquipaje {
-  node [shape=record];
-}

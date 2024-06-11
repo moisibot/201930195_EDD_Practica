@@ -48,7 +48,7 @@ void cargarAviones(const std::string& archivoAviones, ListaCircularDoble& listaA
     }
 }
 
-void cargarPasajeros(const std::string& archivoPasajeros, Cola& colaRegistro) {
+void cargarPasajeros(const std::string& archivoPasajeros, ListaDoblementeEnlazada& listaPasajeros) {
     std::ifstream archivo(archivoPasajeros);
     if (archivo.is_open()) {
         std::cout << "Archivo de pasajeros abierto correctamente." << std::endl;
@@ -71,13 +71,12 @@ void cargarPasajeros(const std::string& archivoPasajeros, Cola& colaRegistro) {
             int equipajeFacturado = pasajero["equipaje_facturado"];
 
             Pasajero* nuevoPasajero = new Pasajero(nombre, nacionalidad, numeroPasaporte, vuelo, asiento, destino, origen, equipajeFacturado);
-            colaRegistro.encolar(nuevoPasajero);
+            listaPasajeros.insertarPasajero(nuevoPasajero);
         }
     } else {
         std::cout << "No se pudo abrir el archivo de pasajeros." << std::endl;
     }
 }
-
 void cargarMovimientos(const std::string& archivoMovimientos, ListaCircularDoble& listaAvionesDisponibles, ListaCircularDoble& listaAvionesMantenimiento, Cola& colaRegistro, Pila& pilaEquipaje, ListaDoblementeEnlazada& listaPasajeros) {
     std::ifstream archivo(archivoMovimientos);
     if (archivo.is_open()) {
@@ -88,7 +87,6 @@ void cargarMovimientos(const std::string& archivoMovimientos, ListaCircularDoble
             std::string comando;
             std::getline(iss, comando, ',');
             if (comando == "IngresoEquipajes") {
-                // ... código para IngresoEquipajes ...
             } else if (comando == "MantenimientoAviones") {
                 std::string estado, numeroRegistro;
                 std::getline(iss, estado, ',');
@@ -152,7 +150,7 @@ void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avi
                 cargarAviones("/home/moisibot/CLionProjects/ControlAeropuerto/aviones.json", avionesDisponibles, avionesMantenimiento);
                 break;
             case 2:
-                cargarPasajeros("/home/moisibot/CLionProjects/ControlAeropuerto/pasajeros.json", colaPasajeros);
+                cargarPasajeros("/home/moisibot/CLionProjects/ControlAeropuerto/pasajeros.json", listaPasajeros);
 
                 break;
             case 3:

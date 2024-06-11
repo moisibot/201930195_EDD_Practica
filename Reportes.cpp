@@ -119,22 +119,26 @@ void generarReportePilaEquipaje(Pila& pilaEquipaje, const std::string& nombreArc
 }
 
 void generarReporteListaPasajeros(ListaDoblementeEnlazada& listaPasajeros, const std::string& nombreArchivo) {
-    std::ofstream archivo("/home/moisibot/CLionProjects"+nombreArchivo + ".dot");
+    std::ofstream archivo(nombreArchivo + ".dot");
     if (archivo.is_open()) {
         archivo << "digraph ListaPasajeros {" << std::endl;
         archivo << "  node [shape=record];" << std::endl;
 
         Nodo* actual = listaPasajeros.getCabeza();
-        int i = 0;
-        while (actual) {
-            archivo << "  nodo" << i << " [label=\"{{" << actual->pasajero->getNumeroDePasaporte() << "}|{Nombre: " << actual->pasajero->getNombre() << "\\nVuelo: " << actual->pasajero->getVuelo() << "\\nAsiento: " << actual->pasajero->getAsiento() << "\\nDestino: " << actual->pasajero->getDestino() << "\\nOrigen: " << actual->pasajero->getOrigen() << "\\nEquipaje: " << actual->pasajero->getEquipajeFacturado() << "}}\"];" << std::endl;
+        if (actual) { // Verifica si la lista no está vacía
+            int i = 0;
+            while (actual) {
+                archivo << "  nodo" << i << " [label=\"{{" << actual->pasajero->getNumeroDePasaporte() << "}|{Nombre: " << actual->pasajero->getNombre() << "\\nVuelo: " << actual->pasajero->getVuelo() << "\\nAsiento: " << actual->pasajero->getAsiento() << "\\nDestino: " << actual->pasajero->getDestino() << "\\nOrigen: " << actual->pasajero->getOrigen() << "\\nEquipaje: " << actual->pasajero->getEquipajeFacturado() << "}}\"];" << std::endl;
 
-            if (actual->getSiguiente()) {
-                archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
+                if (actual->getSiguiente()) {
+                    archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
+                }
+
+                actual = actual->getSiguiente();
+                i++;
             }
-
-            actual = actual->getSiguiente();
-            i++;
+        } else {
+            std::cout << "La lista de pasajeros está vacía." << std::endl;
         }
 
         archivo << "}" << std::endl;
