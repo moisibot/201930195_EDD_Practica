@@ -139,8 +139,7 @@ void generarImagenDesdeArchivoDot(const std::string& archivoEntrada, const std::
     }
 }
 
-
-void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avionesMantenimiento, Cola& colaPasajeros, Pila& pilaEquipajes, ListaDoblementeEnlazada& listaPasajeros) {
+void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avionesMantenimiento, Cola& colaPasajeros, Pila& pilaEquipajes, ListaDoblementeEnlazada& listaPasajeros, Cola& colaRegistro, Pila& pilaEquipaje) {
     int opcion;
     do {
         std::cout << "1. Cargar aviones\n";
@@ -155,33 +154,35 @@ void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avi
         switch (opcion) {
             case 1:
                 cargarAviones("/home/moisibot/CLionProjects/ControlAeropuerto/aviones.json", avionesDisponibles, avionesMantenimiento);
-               // cargarAviones("aviones.json", avionesDisponibles, avionesMantenimiento);
                 break;
             case 2:
                 cargarPasajeros("/home/moisibot/CLionProjects/ControlAeropuerto/pasajeros.json", colaPasajeros);
-               // cargarPasajeros("pasajeros.json", colaPasajeros);
+
                 break;
             case 3:
                 cargarMovimientos("/home/moisibot/CLionProjects/ControlAeropuerto/movimientos.txt", avionesDisponibles,
                                   avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros);
-
-                //cargarMovimientos("movimientos.txt", avionesDisponibles, avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros);
                 break;
             case 4:
-                //listaPasajeros.imprimirLista();
+
                 consultarPasajero(listaPasajeros);
                 break;
             case 5:
                 generarReporteAvionesDisponibles(avionesDisponibles, "avionesDisponibles");
                 generarReporteAvionesMantenimiento(avionesMantenimiento, "avionesMantenimiento");
-                //generarReporteColaRegistro(colaRegistro, "colaRegistro");
-                //generarReportePilaEquipaje(pilaEquipaje, "pilaEquipaje");
-
+                generarReporteColaRegistro(colaRegistro, "colaRegistro");
+                generarReportePilaEquipaje(pilaEquipaje, "pilaEquipaje");
                 generarReporteListaPasajeros(listaPasajeros, "listaPasajeros");
+
                 generarImagenDesdeArchivoDot("avionesDisponibles.dot","avionesDisponibles.png", "png");
                 generarImagenDesdeArchivoDot("avionesMantenimiento.dot","avionesMantenimiento.png", "png");
                 generarImagenDesdeArchivoDot("listaPasajeros.dot","listaPasajeros.png", "png");
-
+                generarImagenDesdeArchivoDot("colaRegistro.dot","colaRegistro.png", "png");
+                generarImagenDesdeArchivoDot("pilaEquipaje.dot","pilaEquipaje.png", "png");
+                std::cout << "Lista de aviones disponibles:" << std::endl;
+                avionesDisponibles.imprimirLista();
+                std::cout << "Lista de aviones en mantenimiento:" << std::endl;
+                avionesMantenimiento.imprimirLista();
                 break;
             case 6:
                 std::cout << "Saliendo...\n";
@@ -195,9 +196,11 @@ void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avi
 int main() {
     ListaCircularDoble avionesDisponibles;
     ListaCircularDoble avionesMantenimiento;
-    Cola colaPasajeros;
-    Pila pilaEquipajes;
+    Cola colaPasajeros, colaRegistro ;
+    Pila pilaEquipajes,pilaEquipaje;
     ListaDoblementeEnlazada listaPasajeros;
+
+
 /*
     cargarAviones("/home/moisibot/CLionProjects/ControlAeropuerto/aviones.json", avionesDisponibles, avionesMantenimiento);
     cargarPasajeros("/home/moisibot/CLionProjects/ControlAeropuerto/pasajeros.json", colaPasajeros);
@@ -222,6 +225,6 @@ int main() {
         std::cout << "Cantidad: " << pilaEquipajes.desapilar() << std::endl;
     }
     */
-    mostrarMenu(avionesDisponibles, avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros);
+    mostrarMenu(avionesDisponibles, avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros, colaRegistro,pilaEquipaje );
     return 0;
 }

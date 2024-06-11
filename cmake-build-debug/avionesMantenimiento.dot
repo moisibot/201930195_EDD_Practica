@@ -1,9 +1,7 @@
 digraph AvionesMantenimiento {
   node [shape=record];
-  nodo0x55955a897de0 [label="{{N12345}|{Vuelo: A100\nModelo: Boeing 737\nFabricante: Boeing\nAño: 2015\nCapacidad: 180\nPeso Max. Despegue: 79000\nAerolinea: AirlineX\nEstado: Mantenimiento}}"];
-  nodo0x55955a897de0 -> nodo0x55955a897d00;
-  nodo0x55955a897d00 [label="{{N54321}|{Vuelo: A102\nModelo: Airbus A320\nFabricante: Airbus\nAño: 2018\nCapacidad: 150\nPeso Max. Despegue: 77000\nAerolinea: AirlineY\nEstado: Mantenimiento}}"];
-  nodo0x55955a897d00 -> nodo0x55955a899bc0;
-  nodo0x55955a899bc0 [label="{{N24680}|{Vuelo: A108\nModelo: Airbus A380\nFabricante: Airbus\nAño: 2010\nCapacidad: 853\nPeso Max. Despegue: 560000\nAerolinea: AirlineW\nEstado: Mantenimiento}}"];
-  nodo0x55955a899bc0 -> nodo0x55955a897de0;
+  nodo0x5637fa0edd00 [label="{{N54321}|{Vuelo: A102\nModelo: Airbus A320\nFabricante: Airbus\nAño: 2018\nCapacidad: 150\nPeso Max. Despegue: 77000\nAerolinea: AirlineY\nEstado: Mantenimiento}}"];
+  nodo0x5637fa0edd00 -> nodo0x5637fa0efbc0;
+  nodo0x5637fa0efbc0 [label="{{N24680}|{Vuelo: A108\nModelo: Airbus A380\nFabricante: Airbus\nAño: 2010\nCapacidad: 853\nPeso Max. Despegue: 560000\nAerolinea: AirlineW\nEstado: Mantenimiento}}"];
+  nodo0x5637fa0efbc0 -> nodo0x5637fa0edd00;
 }

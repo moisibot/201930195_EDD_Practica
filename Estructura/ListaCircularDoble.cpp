@@ -56,6 +56,20 @@ void ListaCircularDoble::insertarAvion(Avion* avion) {
     }
 }
 
+void ListaCircularDoble::insertarNodo(NodoAvion* nodoAvion) {
+    if (!cabeza) {
+        cabeza = nodoAvion;
+        nodoAvion->siguiente = nodoAvion;
+        nodoAvion->anterior = nodoAvion;
+    } else {
+        NodoAvion* ultimo = cabeza->anterior;
+        ultimo->siguiente = nodoAvion;
+        nodoAvion->anterior = ultimo;
+        nodoAvion->siguiente = cabeza;
+        cabeza->anterior = nodoAvion;
+    }
+}
+
 void ListaCircularDoble::eliminarAvion(const std::string& numeroRegistro) {
     if (!cabeza) return;
     NodoAvion* actual = cabeza;
@@ -79,12 +93,12 @@ void ListaCircularDoble::eliminarAvion(const std::string& numeroRegistro) {
     } while (actual != cabeza);
 }
 
-Avion* ListaCircularDoble::buscarAvion(const std::string& numeroRegistro) {
+NodoAvion* ListaCircularDoble::buscarAvion(const std::string& numeroRegistro) {
     if (!cabeza) return nullptr;
     NodoAvion* actual = cabeza;
     do {
         if (actual->avion->numero_de_registro == numeroRegistro) {
-            return actual->avion;
+            return actual;
         }
         actual = actual->siguiente;
     } while (actual != cabeza);
@@ -92,10 +106,25 @@ Avion* ListaCircularDoble::buscarAvion(const std::string& numeroRegistro) {
 }
 
 void ListaCircularDoble::moverAvion(const std::string& numeroRegistro, ListaCircularDoble& otraLista) {
-    Avion* avion = buscarAvion(numeroRegistro);
-    if (avion) {
-        eliminarAvion(numeroRegistro);
-        otraLista.insertarAvion(avion);
+    NodoAvion* nodoAvion = buscarAvion(numeroRegistro);
+    if (nodoAvion) {
+        // Eliminar el nodo de la lista actual
+        if (nodoAvion == cabeza) {
+            if (cabeza->siguiente == cabeza) {
+                cabeza = nullptr;
+            } else {
+                NodoAvion* ultimo = cabeza->anterior;
+                cabeza = cabeza->siguiente;
+                cabeza->anterior = ultimo;
+                ultimo->siguiente = cabeza;
+            }
+        } else {
+            nodoAvion->anterior->siguiente = nodoAvion->siguiente;
+            nodoAvion->siguiente->anterior = nodoAvion->anterior;
+        }
+
+        // Insertar el nodo en la otra lista
+        otraLista.insertarNodo(nodoAvion);
     }
 }
 
