@@ -195,6 +195,7 @@ void mostrarMenu(ListaCircularDoble& avionesDisponibles, ListaCircularDoble& avi
                             generarImagenDesdeArchivoDot("listaPasajeros.dot","listaPasajeros.png", "png");
                             break;
                         case 6:
+                            mostrarMenu(avionesDisponibles, avionesMantenimiento, colaPasajeros, pilaEquipajes, listaPasajeros, colaRegistro, pilaEquipaje);
                             break;
                         default:
                             std::cout << "Opción no válida\n";
