@@ -13,17 +13,22 @@ void generarReporteAvionesDisponibles(ListaCircularDoble& avionesDisponibles, co
 
         NodoAvion* actual = avionesDisponibles.getCabeza();
         if (actual) {
+            NodoAvion* ultimo = nullptr;
             do {
                 archivo << "  nodo" << actual << " [label=\"{{" << actual->avion->getNumeroDeRegistro() << "}|{Vuelo: " << actual->avion->getVuelo() << "\\nModelo: " << actual->avion->getModelo() << "\\nFabricante: " << actual->avion->getFabricante() << "\\nAño: " << actual->avion->getAnoFabricacion() << "\\nCapacidad: " << actual->avion->getCapacidad() << "\\nPeso Max. Despegue: " << actual->avion->getPesoMaxDespegue() << "\\nAerolinea: " << actual->avion->getAerolinea() << "\\nEstado: " << actual->avion->getEstado() << "}}\"];" << std::endl;
 
                 if (actual->getSiguiente()) {
                     archivo << "  nodo" << actual << " -> nodo" << actual->getSiguiente() << ";" << std::endl;
+                    archivo << "  nodo" << actual->getSiguiente() << " -> nodo" << actual << " [constraint=false];" << std::endl;
                 } else {
-                    archivo << "  nodo" << actual << " -> nodo" << avionesDisponibles.getCabeza() << " [constraint=false];" << std::endl;
+                    ultimo = actual;
                 }
 
                 actual = actual->getSiguiente();
             } while (actual != avionesDisponibles.getCabeza());
+
+            archivo << "  nodo" << ultimo << " -> nodo" << avionesDisponibles.getCabeza() << " [constraint=true];" << std::endl;
+            archivo << "  nodo" << avionesDisponibles.getCabeza() << " -> nodo" << ultimo << " [constraint=false];" << std::endl;
         }
 
         archivo << "}" << std::endl;
@@ -42,17 +47,22 @@ void generarReporteAvionesMantenimiento(ListaCircularDoble& avionesMantenimiento
 
         NodoAvion* actual = avionesMantenimiento.getCabeza();
         if (actual) {
+            NodoAvion* ultimo = nullptr;
             do {
                 archivo << "  nodo" << actual << " [label=\"{{" << actual->avion->getNumeroDeRegistro() << "}|{Vuelo: " << actual->avion->getVuelo() << "\\nModelo: " << actual->avion->getModelo() << "\\nFabricante: " << actual->avion->getFabricante() << "\\nAño: " << actual->avion->getAnoFabricacion() << "\\nCapacidad: " << actual->avion->getCapacidad() << "\\nPeso Max. Despegue: " << actual->avion->getPesoMaxDespegue() << "\\nAerolinea: " << actual->avion->getAerolinea() << "\\nEstado: " << actual->avion->getEstado() << "}}\"];" << std::endl;
 
                 if (actual->getSiguiente()) {
                     archivo << "  nodo" << actual << " -> nodo" << actual->getSiguiente() << ";" << std::endl;
+                    archivo << "  nodo" << actual->getSiguiente() << " -> nodo" << actual << " [constraint=false];" << std::endl;
                 } else {
-                    archivo << "  nodo" << actual << " -> nodo" << avionesMantenimiento.getCabeza() << " [constraint=false];" << std::endl;
+                    ultimo = actual;
                 }
 
                 actual = actual->getSiguiente();
             } while (actual != avionesMantenimiento.getCabeza());
+
+            archivo << "  nodo" << ultimo << " -> nodo" << avionesMantenimiento.getCabeza() << " [constraint=true];" << std::endl;
+            archivo << "  nodo" << avionesMantenimiento.getCabeza() << " -> nodo" << ultimo << " [constraint=false];" << std::endl;
         }
 
         archivo << "}" << std::endl;
@@ -68,10 +78,12 @@ void generarReporteColaRegistro(Cola& colaRegistro, const std::string& nombreArc
     if (archivo.is_open()) {
         archivo << "digraph ColaRegistro {" << std::endl;
         archivo << "  node [shape=record];" << std::endl;
-        Pasajero* actual = colaRegistro.getFrente(); // Actualiza aquí si la función se llama de otra manera
+        archivo << "  rankdir=LR;" << std::endl; // Orientación horizontal
+
+        Pasajero* actual = colaRegistro.getFrente();
         int i = 0;
         while (actual) {
-            archivo << "  nodo" << i << " [label=\"{{" << actual->getNumeroDePasaporte() << "}|{Nombre: " << actual->getNombre() << "\\nVuelo: " << actual->getVuelo() << "\\nAsiento: " << actual->getAsiento() << "\\nDestino: " << actual->getDestino() << "\\nOrigen: " << actual->getOrigen() << "\\nEquipaje: " << actual->getEquipajeFacturado() << "}}\"];" << std::endl;
+            archivo << "  nodo" << i << " [label=\"{No.Pasaporte: " << actual->getNumeroDePasaporte() << "\\nNombre: " << actual->getNombre() << "\\nEquipaje: " << actual->getEquipajeFacturado() << "}\"];" << std::endl;
 
             if (actual->getSiguiente()) {
                 archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
@@ -94,18 +106,17 @@ void generarReportePilaEquipaje(Pila& pilaEquipaje, const std::string& nombreArc
     if (archivo.is_open()) {
         archivo << "digraph PilaEquipaje {" << std::endl;
         archivo << "  node [shape=record];" << std::endl;
+        archivo << "  rankdir=LR;" << std::endl; // Orientación horizontal
 
         Equipaje* actual = pilaEquipaje.getCima();
-        Equipaje* anterior = nullptr;
         int i = 0;
         while (actual) {
             archivo << "  nodo" << i << " [label=\"{Cantidad: " << actual->getCantidad() << "}\"];" << std::endl;
 
-            if (anterior) {
-                archivo << "  nodo" << i << " -> nodo" << (i - 1) << ";" << std::endl;
+            if (actual->getSiguiente()) {
+                archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
             }
 
-            anterior = actual;
             actual = actual->getSiguiente();
             i++;
         }
@@ -123,22 +134,23 @@ void generarReporteListaPasajeros(ListaDoblementeEnlazada& listaPasajeros, const
     if (archivo.is_open()) {
         archivo << "digraph ListaPasajeros {" << std::endl;
         archivo << "  node [shape=record];" << std::endl;
+        archivo << "  rankdir=LR;" << std::endl; // Orientación horizontal
 
         Nodo* actual = listaPasajeros.getCabeza();
-        if (actual) { // Verifica si la lista no está vacía
-            int i = 0;
-            while (actual) {
-                archivo << "  nodo" << i << " [label=\"{{" << actual->pasajero->getNumeroDePasaporte() << "}|{Nombre: " << actual->pasajero->getNombre() << "\\nVuelo: " << actual->pasajero->getVuelo() << "\\nAsiento: " << actual->pasajero->getAsiento() << "\\nDestino: " << actual->pasajero->getDestino() << "\\nOrigen: " << actual->pasajero->getOrigen() << "\\nEquipaje: " << actual->pasajero->getEquipajeFacturado() << "}}\"];" << std::endl;
+        int i = 0;
+        while (actual) {
+            archivo << "  nodo" << i << " [label=\"{No.Pasaporte: " << actual->pasajero->getNumeroDePasaporte() << "\\nNombre: " << actual->pasajero->getNombre() << "\\nEquipaje: " << actual->pasajero->getEquipajeFacturado() << "}\"];" << std::endl;
 
-                if (actual->getSiguiente()) {
-                    archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
-                }
-
-                actual = actual->getSiguiente();
-                i++;
+            if (actual->siguiente) {
+                archivo << "  nodo" << i << " -> nodo" << (i + 1) << ";" << std::endl;
             }
-        } else {
-            std::cout << "La lista de pasajeros está vacía." << std::endl;
+
+            if (actual->anterior) {
+                archivo << "  nodo" << i << " -> nodo" << (i - 1) << " [constraint=false];" << std::endl;
+            }
+
+            actual = actual->siguiente;
+            i++;
         }
 
         archivo << "}" << std::endl;

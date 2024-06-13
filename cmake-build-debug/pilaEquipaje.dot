@@ -1,3 +1,4 @@
 digraph PilaEquipaje {
   node [shape=record];
+  rankdir=LR;
 }

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ControlAeropuerto"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ControlAeropuerto">
+				<Option output="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/ControlAeropuerto" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/moisibot/CLionProjects/ControlAeropuerto/include"/>
+					<Add directory="/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include"/>
+					<Add directory="/usr/include/c++/13"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/13"/>
+					<Add directory="/usr/include/c++/13/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/13/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 ControlAeropuerto"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ControlAeropuerto/fast">
+				<Option output="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/ControlAeropuerto" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/moisibot/CLionProjects/ControlAeropuerto/include"/>
+					<Add directory="/home/moisibot/CLionProjects/ControlAeropuerto/extern/json/single_include"/>
+					<Add directory="/usr/include/c++/13"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/13"/>
+					<Add directory="/usr/include/c++/13/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/13/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 ControlAeropuerto/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/home/moisibot/CLionProjects/ControlAeropuerto/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Cola.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Cola.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/ListaCircularDoble.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/ListaCircularDoble.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/ListaDoblementeEnlazada.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/ListaDoblementeEnlazada.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Nodo.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Nodo.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Pila.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Estructura/Pila.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Avion.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Avion.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Equipaje.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Equipaje.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Pasajero.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Objetos/Pasajero.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Reportes.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/Reportes.h">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/main.cpp">
+			<Option target="ControlAeropuerto"/>
+		</Unit>
+		<Unit filename="/home/moisibot/CLionProjects/ControlAeropuerto/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
